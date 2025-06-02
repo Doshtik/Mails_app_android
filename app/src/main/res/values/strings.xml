@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MailsApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mailsapp">MailsApp</string>
+    <string name="authorization">Авторизация</string>
+    <string name="phoneNumber">Номер телефона:</string>
+    <string name="password">Пароль:</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="make_account">Создать аккаунт</string>
+    <string name="Регистрация">Регистрация</string>
+</resources>
