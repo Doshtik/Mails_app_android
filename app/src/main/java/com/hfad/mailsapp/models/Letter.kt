@@ -12,33 +12,33 @@ class Letter {
     @ColumnInfo(name = "id")
     var Id:Int = 0
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "status_id")
     var IdStatus:Int = 0
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "mailbox_sender_id")
     var IdMilboxSender:Int = 0
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "mailbox_recipient_id")
     var IdMilboxRecipient:Int? = null
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "theme")
     var Theme:String? = null
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "message")
     var Message:String = ""
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "date")
     var Date:Date = Date()
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "is_favorite")
     var IsFavorite: Boolean = false
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "label_id")
     var IdLabel:Int? = null
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "mailbox_copy_recipient_id")
     var IdCopyRecipient:Int = 0
 
-    @ColumnInfo(name = "")
+    @ColumnInfo(name = "is_read")
     var IsRead: Boolean = false
 }
