@@ -1,12 +1,14 @@
 package com.hfad.mailsapp.models
 
+import android.content.res.Resources.Theme
+import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity(tableName = "letters")
-class Letter {
+class Letter(mailboxSenderId: Int, mailboxCopyRecipientId: Int, theme: String, message: String) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -16,16 +18,16 @@ class Letter {
     var IdStatus:Int = 0
 
     @ColumnInfo(name = "mailbox_sender_id")
-    var IdMilboxSender:Int = 0
+    var IdMilboxSender:Int = mailboxSenderId
 
     @ColumnInfo(name = "mailbox_recipient_id")
     var IdMilboxRecipient:Int? = null
 
     @ColumnInfo(name = "theme")
-    var Theme:String? = null
+    var Theme:String? = theme
 
     @ColumnInfo(name = "message")
-    var Message:String = ""
+    var Message:String = message
 
     @ColumnInfo(name = "date")
     var Date:Date = Date()
@@ -37,7 +39,7 @@ class Letter {
     var IdLabel:Int? = null
 
     @ColumnInfo(name = "mailbox_copy_recipient_id")
-    var IdCopyRecipient:Int = 0
+    var IdCopyRecipient:Int = mailboxCopyRecipientId
 
     @ColumnInfo(name = "is_read")
     var IsRead: Boolean = false

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authorizationFragment">
+
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.hfad.mailsapp.fragments.AuthorizationFragment"
+        android:label="fragment_authorization"
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/action_from_auth_to_reg"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_from_auth_to_select_mailbox"
+            app:destination="@id/selectorMailboxFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.hfad.mailsapp.fragments.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_from_reg_to_auth"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectorMailboxFragment"
+        android:name="com.hfad.mailsapp.fragments.SelectorMailboxFragment"
+        android:label="fragment_selector_mailbox"
+        tools:layout="@layout/fragment_selector_mailbox" >
+        <action
+            android:id="@+id/action_from_select_mailbox_to_make_mailbox"
+            app:destination="@id/makeMailboxFragment" />
+        <action
+            android:id="@+id/action_from_select_mailbox_to_letter_menu"
+            app:destination="@id/letterMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeMailboxFragment"
+        android:name="com.hfad.mailsapp.fragments.MakeMailboxFragment"
+        android:label="fragment_make_mailbox"
+        tools:layout="@layout/fragment_make_mailbox" />
+    <fragment
+        android:id="@+id/letterMenuFragment"
+        android:name="com.hfad.mailsapp.fragments.LetterMenuFragment"
+        android:label="fragment_letter_menu"
+        tools:layout="@layout/fragment_letter_menu" >
+        <action
+            android:id="@+id/action_from_letter_menu_to_read_letter"
+            app:destination="@id/readLetterFragment" />
+        <action
+            android:id="@+id/action_from_letter_menu_to_make_letter"
+            app:destination="@id/makeLetterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readLetterFragment"
+        android:name="com.hfad.mailsapp.fragments.ReadLetterFragment"
+        android:label="fragment_read_letter"
+        tools:layout="@layout/fragment_read_letter" >
+        <action
+            android:id="@+id/action_from_read_letter_to_letter_menu"
+            app:destination="@id/letterMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeLetterFragment"
+        android:name="com.hfad.mailsapp.fragments.MakeLetterFragment"
+        android:label="fragment_make_letter"
+        tools:layout="@layout/fragment_make_letter" >
+        <action
+            android:id="@+id/action_from_make_letter_to_letter_menu"
+            app:destination="@id/letterMenuFragment" />
+    </fragment>
+</navigation>
