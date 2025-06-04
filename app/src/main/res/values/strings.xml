@@ -10,4 +10,9 @@
     <string name="no_account">Нет аккаунта?</string>
     <string name="make_account">Создать аккаунт</string>
     <string name="Регистрация">Регистрация</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="make_letter">Создание письма</string>
+    <string name="message_to">Кому:</string>
+    <string name="message_theme">Тема:</string>
 </resources>

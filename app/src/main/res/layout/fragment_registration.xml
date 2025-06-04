@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.RegistrationFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hfad.mailsapp.view_models.RegistrationViewModel" />
+    </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -21,30 +26,67 @@
             android:textSize="24sp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/firstname"/>
+
+        <EditText
+            android:id="@+id/firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:text="@{viewModel.firstname}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lastname"/>
+
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:text="@{viewModel.lastname}"/>
+
+        <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/phoneNumber" />
+
         <EditText
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:text="@{viewModel.phoneNumber}" />
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/password" />
+
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:text="@{viewModel.password}" />
 
         <Button
             android:id="@+id/buttonConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="@string/confirm"/>
     </LinearLayout>
 
-</FrameLayout>
+</layout>

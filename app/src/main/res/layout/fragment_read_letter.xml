@@ -4,11 +4,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ReadLetterFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_make_letter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp">
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Назад"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:text="@string/message_to"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/message_to"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:maxLines="1"
+                android:textSize="23sp"/>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:text="@string/message_theme"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/message_theme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:maxLines="1"
+                android:textSize="23sp"/>
+        </GridLayout>
+        <TextView
+            android:id="@+id/message_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|start"
+            android:textAlignment="viewStart"
+            android:paddingTop="8dp"
+            android:textSize="23sp"
+            android:hint="Сообщение:"/>
+    </LinearLayout>
 </FrameLayout>

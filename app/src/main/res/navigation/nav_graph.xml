@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_from_select_mailbox_to_letter_menu"
             app:destination="@id/letterMenuFragment" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/makeMailboxFragment"
