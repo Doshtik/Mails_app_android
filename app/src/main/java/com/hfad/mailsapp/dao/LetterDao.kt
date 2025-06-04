@@ -20,8 +20,8 @@ interface LetterDao {
     suspend fun delete(letter: Letter)
 
     @Query("SELECT * FROM letters WHERE id = :letterId")
-    fun get(letterId: Int): LiveData<Letter>
+    fun get(letterId: Int): Letter?
 
     @Query("SELECT * FROM letters WHERE mailbox_sender_id = :mailboxSenderId")
-    fun getBySenderId(mailboxSenderId: Int): LiveData<Letter>
+    fun getBySenderId(mailboxSenderId: Int): Letter?
 }

@@ -34,7 +34,7 @@ class AuthorizationFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.buttonConfirm.setOnClickListener() {
-            if (viewModel.userAvailabilityConfirm())
+            if (viewModel.isUserAvailable())
             {
                 val action = AuthorizationFragmentDirections.actionFromAuthToSelectMailbox(viewModel.userId)
                 view.findNavController().navigate(action)

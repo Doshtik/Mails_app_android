@@ -1,6 +1,5 @@
 package com.hfad.mailsapp.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,7 +16,7 @@ interface UserDao {
     @Delete
     suspend fun delete(user: User)
     @Query("SELECT * FROM users WHERE id = :userId")
-    fun get(userId: Int): LiveData<User>
+    fun get(userId: Int): User?
     @Query("SELECT * FROM users WHERE phone_number = :phoneNumber")
-    fun getByLoginData(phoneNumber: String): User?
+    fun getByPhoneNumber(phoneNumber: String): User?
 }

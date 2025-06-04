@@ -16,5 +16,7 @@ interface MailLabelDao {
     @Delete
     suspend fun delete(mailLabel: MailLabel)
     @Query("SELECT * FROM mail_labels WHERE id = :mailLabelId")
-    fun get(mailLabelId: Int)
+    fun get(mailLabelId: Int): MailLabel?
+    @Query("SELECT * FROM mail_labels WHERE label_name = :labelName")
+    fun getByLabelName(labelName: String): MailLabel?
 }

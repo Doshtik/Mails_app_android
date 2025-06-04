@@ -17,7 +17,7 @@ interface MailboxDao {
     @Delete
     suspend fun delete(mailbox: Mailbox)
     @Query("SELECT * FROM mailboxes WHERE id = :mailboxId")
-    fun get(mailboxId: Int): LiveData<Mailbox>
+    fun get(mailboxId: Int): Mailbox?
     @Query("SELECT * FROM mailboxes WHERE user_id = :userId")
-    fun getByUserId(userId: Int): LiveData<Mailbox>
+    fun getByUserId(userId: Int): List<Mailbox>?
 }

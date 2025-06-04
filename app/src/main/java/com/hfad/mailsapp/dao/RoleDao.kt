@@ -17,7 +17,7 @@ interface RoleDao {
     @Delete
     suspend fun delete(role: Role)
     @Query("SELECT * FROM roles WHERE id = :roleId")
-    fun get(roleId: Int): LiveData<Role>
+    fun get(roleId: Int): Role?
     @Query("SELECT * FROM roles WHERE role_name = :roleName")
-    fun getByRoleName(roleName: String)
+    fun getByRoleName(roleName: String): Role?
 }

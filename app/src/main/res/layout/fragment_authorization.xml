@@ -79,10 +79,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:clickable="true"
                 android:text="@string/make_account"
-                app:linkTextColor="@color/blue"
                 android:textColorLink="@color/blue"
-                android:clickable="true"/>
+                app:linkTextColor="@color/blue"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
     </LinearLayout>
 </layout>

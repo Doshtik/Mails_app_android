@@ -20,8 +20,8 @@ interface AttachmentDao {
     suspend fun delete(attachment: Attachment)
 
     @Query("SELECT * FROM attachments WHERE id = :attachId")
-    fun get(attachId: Int): LiveData<Attachment>
+    fun get(attachId: Int): Attachment?
 
     @Query("SELECT * FROM attachments WHERE id_letter = :letterId")
-    fun getByLetterId(letterId: Int): LiveData<Attachment>
+    fun getByLetterId(letterId: Int): Attachment?
 }

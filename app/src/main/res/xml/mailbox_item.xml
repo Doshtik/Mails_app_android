@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="androidx.lifecycle.LiveData" />
         <variable
             name="viewModel"
-            type="com.hfad.mailsapp.view_models.MailboxViewModel" />
+            type="com.hfad.mailsapp.view_models.SelectorMailboxesViewModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,13 +17,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/task_name"
+                android:id="@+id/mailbox_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:padding="8dp" />
+                android:textSize="18sp"
+                android:padding="8dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

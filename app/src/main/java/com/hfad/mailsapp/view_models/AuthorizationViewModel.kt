@@ -9,8 +9,8 @@ class AuthorizationViewModel(val userDao: UserDao): ViewModel() {
     var phoneNumber: String = ""
     var password: String = ""
 
-    fun userAvailabilityConfirm(): Boolean {
-        var user = userDao.getByLoginData(phoneNumber)
+    fun isUserAvailable(): Boolean {
+        var user = userDao.getByPhoneNumber(phoneNumber)
         if (user != null && user.Password == password)
         {
             userId = user.Id
