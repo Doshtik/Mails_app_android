@@ -13,4 +13,9 @@ class SelectorMailboxesViewModel(private val userDao: UserDao, private val mailb
     fun getByUserId(): List<Mailbox>? {
         return mailboxDao.getByUserId(userId)
     }
+
+    /*fun createCard(mailbox: Mailbox): CardView {
+        return CardView()
+    }*/
+
 }

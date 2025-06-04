@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.SelectorMailboxFragment"
-    android:orientation="vertical">
+    tools:context=".fragments.SelectorMailboxFragment"> <!-- REMOVED INVALID ATTRIBUTES -->
+
     <data>
         <variable
             name="viewModel"
             type="com.hfad.mailsapp.view_models.SelectorMailboxesViewModel" />
     </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <Button
-            android:id="@+id/button_confirm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text="@string/confirm"/>
 
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text="@string/delete"/>
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mailbox_recycler_view"
+    <!-- Single root container (FrameLayout) -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:layout_margin="8dp"
-        android:scrollbars="vertical"/>
+        android:orientation="vertical"> <!-- Orientation moved here -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/button_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="@string/confirm"/>
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="@string/delete"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mailbox_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            tools:ignore="SpeakableTextPresentCheck"/>
+    </FrameLayout>
 </layout>

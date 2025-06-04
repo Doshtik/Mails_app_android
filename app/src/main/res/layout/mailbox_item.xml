@@ -3,27 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="androidx.lifecycle.LiveData" />
         <variable
-            name="viewModel"
-            type="com.hfad.mailsapp.view_models.SelectorMailboxesViewModel" />
+            name="mailbox"
+            type="com.hfad.mailsapp.models.Mailbox" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:padding="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:importantForAccessibility="yes"
         app:cardElevation="4dp"
         app:cardCornerRadius="4dp">
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/mailbox_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/mailbox_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:padding="8dp"/>
-        </LinearLayout>
+            android:textSize="18sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{mailbox.mailName}"/>
+
     </androidx.cardview.widget.CardView>
 </layout>

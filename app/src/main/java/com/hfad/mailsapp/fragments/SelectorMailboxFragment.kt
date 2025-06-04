@@ -36,6 +36,11 @@ class SelectorMailboxFragment : Fragment() {
 
         var mailboxes = viewModel.getByUserId();
 
+        if (mailboxes != null) {
+            for (mailbox in mailboxes) {
+                mailbox
+            }
+        }
 
         binding.buttonConfirm.setOnClickListener() {
 
