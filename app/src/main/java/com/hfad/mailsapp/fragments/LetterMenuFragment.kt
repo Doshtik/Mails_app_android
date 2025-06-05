@@ -1,31 +1,22 @@
 package com.hfad.mailsapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.mailsapp.AppDatabase
 import com.hfad.mailsapp.R
 import com.hfad.mailsapp.adapters.LetterItemAdapter
-import com.hfad.mailsapp.adapters.MailboxItemAdapter
 import com.hfad.mailsapp.dao.LetterDao
 import com.hfad.mailsapp.dao.MailboxDao
-import com.hfad.mailsapp.dao.RoleDao
-import com.hfad.mailsapp.dao.UserDao
 import com.hfad.mailsapp.databinding.FragmentLetterMenuBinding
-import com.hfad.mailsapp.databinding.FragmentRegistrationBinding
-import com.hfad.mailsapp.models.Letter
-import com.hfad.mailsapp.models.Mailbox
 import com.hfad.mailsapp.view_models.LetterMenuViewModel
-import com.hfad.mailsapp.view_models.RegistrationViewModel
 import com.hfad.mailsapp.view_models.factories.LetterMenuViewModelFactory
-import com.hfad.mailsapp.view_models.factories.RegistrationViewModelFactory
 
 class LetterMenuFragment : Fragment() {
     private var _binding: FragmentLetterMenuBinding? = null
@@ -48,10 +39,31 @@ class LetterMenuFragment : Fragment() {
         val adapter = LetterItemAdapter({ letter -> navigateToReadLetter(letter.Id)})
         binding.mailRecyclerView.adapter = adapter
 
+        viewModel.letters.observe(viewLifecycleOwner) { letters ->
+            adapter.submitList(letters)
+        }
+
         binding.buttonMakeLetter.setOnClickListener() {
             val action = LetterMenuFragmentDirections.actionFromLetterMenuToMakeLetter(viewModel.mailboxSenderId!!)
             view.findNavController().navigate(action)
         }
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            viewModel.mailboxSenderId?.let { mailboxId ->
+                when (menuItem.itemId) {
+                    R.id.nav_inbox -> viewModel.loadInboxLetters(mailboxId)
+                    R.id.nav_sent -> viewModel.loadSentLetters(mailboxId)
+                    R.id.nav_favorite -> viewModel.loadFavoriteLetters(mailboxId)
+                    R.id.nav_drafts -> viewModel.loadDraftLetters(mailboxId)
+                    R.id.nav_trash -> viewModel.loadGarbageLetters(mailboxId)
+                }
+            }
+            true
+        }
+        viewModel.mailboxSenderId?.let {
+            viewModel.loadInboxLetters(it)
+        }
+
         return view
     }
     override fun onDestroyView() {

@@ -22,9 +22,7 @@ class LetterItemAdapter(private val onItemClick: (Letter) -> Unit): ListAdapter<
         holder.bind(item)
 
         holder.itemView.setOnClickListener {
-            holder.itemView.setOnClickListener {
-                onItemClick(item) // Вызов колбэка вместо прямой навигации
-            }
+            onItemClick(item)
         }
     }
 }
