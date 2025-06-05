@@ -7,15 +7,14 @@ import com.hfad.mailsapp.dao.UserDao
 import com.hfad.mailsapp.models.Mailbox
 
 class SelectorMailboxesViewModel(private val userDao: UserDao, private val mailboxDao: MailboxDao): ViewModel() {
-    var userId: Int = 0
-    var selectedCard: CardView? = null
+    var userId: Int? = null
+    var mailboxId: Int? = null
 
-    fun getByUserId(): List<Mailbox>? {
-        return mailboxDao.getByUserId(userId)
+    fun getByUserId(): List<Mailbox> {
+        return mailboxDao.getByUserId(userId!!)
     }
 
-    /*fun createCard(mailbox: Mailbox): CardView {
-        return CardView()
-    }*/
-
+    suspend fun deleteItem(mailbox: Mailbox) {
+        mailboxDao.delete(mailbox)
+    }
 }

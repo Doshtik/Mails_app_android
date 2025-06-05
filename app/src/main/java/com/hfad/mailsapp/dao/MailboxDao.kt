@@ -19,5 +19,7 @@ interface MailboxDao {
     @Query("SELECT * FROM mailboxes WHERE id = :mailboxId")
     fun get(mailboxId: Int): Mailbox?
     @Query("SELECT * FROM mailboxes WHERE user_id = :userId")
-    fun getByUserId(userId: Int): List<Mailbox>?
+    fun getByUserId(userId: Int): List<Mailbox>
+    @Query("SELECT * FROM mailboxes WHERE mail_name = :mailName")
+    fun getByMailName(mailName: String): Mailbox?
 }

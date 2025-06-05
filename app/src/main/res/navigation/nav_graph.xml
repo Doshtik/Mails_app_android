@@ -45,7 +45,11 @@
         android:id="@+id/makeMailboxFragment"
         android:name="com.hfad.mailsapp.fragments.MakeMailboxFragment"
         android:label="fragment_make_mailbox"
-        tools:layout="@layout/fragment_make_mailbox" />
+        tools:layout="@layout/fragment_make_mailbox" >
+        <argument
+                android:name="userId"
+                app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/letterMenuFragment"
         android:name="com.hfad.mailsapp.fragments.LetterMenuFragment"
@@ -57,6 +61,9 @@
         <action
             android:id="@+id/action_from_letter_menu_to_make_letter"
             app:destination="@id/makeLetterFragment" />
+        <argument
+                android:name="mailboxId"
+                app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/readLetterFragment"
@@ -66,6 +73,8 @@
         <action
             android:id="@+id/action_from_read_letter_to_letter_menu"
             app:destination="@id/letterMenuFragment" />
+        <argument android:name="letterId"
+                app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/makeLetterFragment"
@@ -75,5 +84,8 @@
         <action
             android:id="@+id/action_from_make_letter_to_letter_menu"
             app:destination="@id/letterMenuFragment" />
+        <argument
+                android:name="mailboxSenderId"
+                app:argType="integer" />
     </fragment>
 </navigation>

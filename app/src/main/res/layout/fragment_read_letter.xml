@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ReadLetterFragment">
+    
+    <data>
+        <variable
+                name="viewModel"
+                type="com.hfad.mailsapp.view_models.ReadLetterViewModel" />
+    </data>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,7 +52,8 @@
                 android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:maxLines="1"
-                android:textSize="23sp"/>
+                android:textSize="23sp"
+                android:text="@{viewModel.recipient}"/>
         </GridLayout>
 
         <GridLayout
@@ -69,7 +77,8 @@
                 android:layout_column="1"
                 android:layout_columnWeight="1"
                 android:maxLines="1"
-                android:textSize="23sp"/>
+                android:textSize="23sp"
+                android:text="@{viewModel.theme}"/>
         </GridLayout>
         <TextView
             android:id="@+id/message_text"
@@ -79,6 +88,7 @@
             android:textAlignment="viewStart"
             android:paddingTop="8dp"
             android:textSize="23sp"
-            android:hint="Сообщение:"/>
+            android:hint="Сообщение:"
+            android:text="@{viewModel.message}"/>
     </LinearLayout>
-</FrameLayout>
+</layout>

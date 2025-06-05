@@ -5,56 +5,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.hfad.mailsapp.AppDatabase
 import com.hfad.mailsapp.R
+import com.hfad.mailsapp.dao.MailboxDao
+import com.hfad.mailsapp.dao.UserDao
+import com.hfad.mailsapp.databinding.FragmentAuthorizationBinding
+import com.hfad.mailsapp.databinding.FragmentMakeMailboxBinding
+import com.hfad.mailsapp.view_models.AuthorizationViewModel
+import com.hfad.mailsapp.view_models.MakeMailboxViewModel
+import com.hfad.mailsapp.view_models.factories.AuthorizationViewModelFactory
+import com.hfad.mailsapp.view_models.factories.MakeMailboxViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MakeMailboxFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MakeMailboxFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding:  FragmentMakeMailboxBinding? = null
+    private val binding get() = _binding!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentMakeMailboxBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+        val application = requireNotNull(this.activity).application
+        val mailboxDao: MailboxDao = AppDatabase.getInstance(application).mailboxDao()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_make_mailbox, container, false)
-    }
+        val viewModelFactory = MakeMailboxViewModelFactory(mailboxDao)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MakeMailboxViewModel::class.java)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MakeMailboxFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MakeMailboxFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.buttonMakeMailbox.setOnClickListener() {
+            if (viewModel.isMailNameAreTaken())
+            {
+                viewModel.create()
+                val action = MakeLetterFragmentDirections.actionFromMakeLetterToLetterMenu(viewModel.userId!!)
+                view.findNavController().navigate(action)
             }
+        }
+        return view
     }
 }

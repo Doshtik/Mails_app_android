@@ -5,56 +5,61 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.hfad.mailsapp.AppDatabase
 import com.hfad.mailsapp.R
+import com.hfad.mailsapp.adapters.LetterItemAdapter
+import com.hfad.mailsapp.adapters.MailboxItemAdapter
+import com.hfad.mailsapp.dao.LetterDao
+import com.hfad.mailsapp.dao.MailboxDao
+import com.hfad.mailsapp.dao.RoleDao
+import com.hfad.mailsapp.dao.UserDao
+import com.hfad.mailsapp.databinding.FragmentLetterMenuBinding
+import com.hfad.mailsapp.databinding.FragmentRegistrationBinding
+import com.hfad.mailsapp.models.Letter
+import com.hfad.mailsapp.models.Mailbox
+import com.hfad.mailsapp.view_models.LetterMenuViewModel
+import com.hfad.mailsapp.view_models.RegistrationViewModel
+import com.hfad.mailsapp.view_models.factories.LetterMenuViewModelFactory
+import com.hfad.mailsapp.view_models.factories.RegistrationViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LetterMenuFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LetterMenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentLetterMenuBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentLetterMenuBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val application = requireNotNull(this.activity).application
+        val letterDao: LetterDao = AppDatabase.getInstance(application).letterDao()
+        val mailboxDao: MailboxDao = AppDatabase.getInstance(application).mailboxDao()
+
+        val viewModelFactory = LetterMenuViewModelFactory(letterDao, mailboxDao)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(LetterMenuViewModel::class.java)
+
+        viewModel.mailboxSenderId = LetterMenuFragmentArgs.fromBundle(requireArguments()).mailboxId
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        val adapter = LetterItemAdapter({ letter -> navigateToReadLetter(letter.Id)})
+        binding.mailRecyclerView.adapter = adapter
+
+        binding.buttonMakeLetter.setOnClickListener() {
+            val action = LetterMenuFragmentDirections.actionFromLetterMenuToMakeLetter(viewModel.mailboxSenderId!!)
+            view.findNavController().navigate(action)
         }
+        return view
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_letter_menu, container, false)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LetterMenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LetterMenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun navigateToReadLetter(letterId: Int) {
+        val action = LetterMenuFragmentDirections.actionFromLetterMenuToReadLetter(letterId)
+        findNavController().navigate(action)
     }
 }

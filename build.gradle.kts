@@ -5,9 +5,3 @@ plugins {
     alias(libs.plugins.devtoolsKsp)
     alias(libs.plugins.navigation.safeargs.kotlin) apply false
 }
-buildscript {
-    dependencies {
-        classpath (libs.kotlin.gradle.plugin)
-        classpath (libs.gradle)
-    }
-}
